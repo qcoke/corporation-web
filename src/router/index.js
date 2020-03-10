@@ -56,35 +56,34 @@ export const constantRoutes = [
   },
 
   {
-    path: '/example',
+    path: '/company',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
+    redirect: '/company/employee',
+    name: 'company',
     meta: { title: '组织/人员', icon: 'example' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
+        path: 'orgs',
+        name: 'Org',
         component: () => import('@/views/orgs/index'),
         meta: { title: '组织管理', icon: 'table' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
+        path: 'employee',
+        name: 'Employee',
+        component: () => import('@/views/Employee/index'),
         meta: { title: '人员管理', icon: 'tree' }
       }
     ]
-  },
-
-  {
-    path: '/form',
+  }, {
+    path: '/about',
     component: Layout,
+    meta: { title: '关于我们', icon: 'form' },
     children: [
       {
         path: 'index',
         name: 'Form',
-        component: () => import('@/views/form/index'),
+        component: () => import('@/views/about/index'),
         meta: { title: '关于我们', icon: 'form' }
       }
     ]
@@ -95,8 +94,8 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: '浏览网站', icon: 'link' }
+        path: 'https://www.baidu.com/',
+        meta: { title: '网站首页', icon: 'link' }
       }
     ]
   },
