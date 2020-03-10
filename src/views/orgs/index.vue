@@ -1,11 +1,26 @@
 <template>
-    $END$
+  <div class="app-container">
+    <el-table
+      v-loading="listLoading"
+      :data="list"
+      element-loading-text="Loading"
+      border
+      fit
+      highlight-current-row
+    />
+  </div>
 </template>
 
 <script>
-  export default {
-    name: 'index.vue'
-  }
+export default {
+  data() {
+    return {
+      list: null,
+      listLoading: true
+    }
+  },
+  methods: {}
+}
 </script>
 
 <style scoped>
