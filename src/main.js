@@ -17,6 +17,8 @@ import '@/permission' // permission control
 
 import GlobleFilter from './utils/globle_filter'
 
+import CKEditor from '@ckeditor/ckeditor5-vue';
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -36,6 +38,8 @@ Vue.use(ElementUI, { locale })
 // Vue.use(ElementUI)
 // 导入通用过滤器
 GlobleFilter.initFilter()
+
+Vue.use(CKEditor)
 
 Vue.config.productionTip = false
 

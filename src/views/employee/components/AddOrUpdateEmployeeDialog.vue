@@ -29,6 +29,9 @@
           </el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="介绍：" prop="description">
+        <ckeditor :editor="editor" v-model="model.description" :config="editorConfig"></ckeditor>
+      </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click="closeIt">取 消</el-button>
@@ -40,6 +43,7 @@
 <script>
 import { orgsList } from '../../../api/orgs'
 import { staffeAddOrUpdate, staffeFind } from '../../../api/employee'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 export default {
   name: 'AddOrUpdateEmployeeDialog',
@@ -52,9 +56,14 @@ export default {
       orgDic: [],
       rules: {
         name: [{ required: true, message: '请输入员工姓名', trigger: 'blur' }],
-        englist_name: [{ required: false, message: '请输入英文名', trigger: 'blur' }],
-        birthday: [{ required: false, message: '请选择出生年月', trigger: 'blur' }],
-        org_id: [{ required: false, message: '请选择部门', trigger: 'blur' }]
+        englist_name: [{ required: true, message: '请输入英文名', trigger: 'blur' }],
+        birthday: [{ required: true, message: '请选择出生年月', trigger: 'blur' }],
+        org_id: [{ required: true, message: '请选择部门', trigger: 'blur' }],
+        info: [{ required: true, message: '请输入员工简历', trigger: 'blur' }]
+      },
+      editor: ClassicEditor,
+      editorConfig: {
+        height: '400px',
       }
     }
   },
