@@ -70,8 +70,8 @@ export const constantRoutes = [
       },
       {
         path: 'employee',
-        name: 'Employee',
-        component: () => import('@/views/Employee/index'),
+        name: 'employee',
+        component: () => import('@/views/employee/index'),
         meta: { title: '人员管理', icon: 'tree' }
       }
     ]

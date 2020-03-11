@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { orgAdd, orgFind } from '../../../api/orgs'
+import { orgAddOrUpdate, orgFind } from '../../../api/orgs'
 
 export default {
   name: 'AddOrUpdateOrgDialog',
@@ -45,7 +45,7 @@ export default {
       var _this = this
       this.$refs['submitForm'].validate(valid => {
         if (valid === true) {
-          orgAdd(_this.model).then(response => {
+          orgAddOrUpdate(_this.model).then(response => {
             _this.$message({
               message: '操作成功',
               type: 'success'
@@ -63,11 +63,7 @@ export default {
     load(id) {
       const _this = this
       orgFind(id).then(res => {
-        const _model_ = {
-          id: res._id,
-          title: res.title,
-          description: res.description
-        }
+        const _model_ = { ...res }
         _this.model = _model_
       })
     },

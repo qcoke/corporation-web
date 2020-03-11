@@ -18,7 +18,7 @@
       <el-table-column prop="description" label="部门说明" />
       <el-table-column align="center" prop="createdAt" label="创建时间" width="240">
         <template slot-scope="scope">
-          <span>{{ scope.row.createdAt }}</span>
+          <span>{{ scope.row.createdAt | dateformat }}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" label="操作" width="300">
