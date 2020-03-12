@@ -14,9 +14,9 @@
       fit
       highlight-current-row
     >
-      <el-table-column label="姓名" prop="name" width="400"/>
-      <el-table-column label="英文名" prop="englist_name"/>
-      <el-table-column label="部门" prop="org_id" :formatter="changeForText"></el-table-column>
+      <el-table-column label="姓名" prop="name" width="400" />
+      <el-table-column label="英文名" prop="englist_name" />
+      <el-table-column label="部门" prop="org_id" :formatter="changeForText" />
       <el-table-column align="center" prop="createdAt" label="创建时间" width="240">
         <template slot-scope="scope">
           <span>{{ scope.row.createdAt|dateformat }}</span>
@@ -24,15 +24,14 @@
       </el-table-column>
       <el-table-column align="center" label="操作" width="300">
         <template slot-scope="scope">
-          <el-button type="primary" plain size="mini" @click="showAddOrUpdate(scope.row._id)"><i
-            class="el-icon-edit-outline"/> 编 辑
+          <el-button type="primary" plain size="mini" @click="showAddOrUpdate(scope.row._id)"><i class="el-icon-edit-outline" /> 编 辑
           </el-button>
-          <el-button type="danger" plain size="mini" @click="deleteData(scope.row._id)"><i class="el-icon-close"/> 删 除
+          <el-button type="danger" plain size="mini" @click="deleteData(scope.row._id)"><i class="el-icon-close" /> 删 除
           </el-button>
         </template>
       </el-table-column>
     </el-table>
-    <AddOrUpdateEmployeeDialog ref="AddOrUpdateEmployeeDialog" @reload="load"/>
+    <AddOrUpdateEmployeeDialog ref="AddOrUpdateEmployeeDialog" @reload="load" />
   </div>
 </template>
 

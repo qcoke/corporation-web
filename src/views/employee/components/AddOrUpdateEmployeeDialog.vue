@@ -10,14 +10,14 @@
   >
     <el-form ref="submitForm" label-width="100px" :model="model" :rules="rules">
       <el-form-item label="姓名：" prop="name">
-        <input type="hidden" v-model="model._id" />
-        <el-input type="text" v-model="model.name" placeholder="请输入姓名" ></el-input>
+        <input v-model="model._id" type="hidden">
+        <el-input v-model="model.name" type="text" placeholder="请输入姓名" />
       </el-form-item>
       <el-form-item label="英文名：" prop="englist_name">
-        <el-input type="text" placeholder="请输入英文名" v-model="model.englist_name"></el-input>
+        <el-input v-model="model.englist_name" type="text" placeholder="请输入英文名" />
       </el-form-item>
       <el-form-item label="出生日期：" prop="birthday">
-        <el-date-picker type="date" placeholder="请选择出生日期" v-model="model.birthday" style="width: 100%;"></el-date-picker>
+        <el-date-picker v-model="model.birthday" type="date" placeholder="请选择出生日期" style="width: 100%;" />
       </el-form-item>
       <el-form-item label="部门：" prop="org_id">
         <el-select v-model="model.org_id" placeholder="请选择" style="width: 100%;">
@@ -25,12 +25,12 @@
             v-for="item in orgDic"
             :key="item._id"
             :label="item.title"
-            :value="item._id">
-          </el-option>
+            :value="item._id"
+          />
         </el-select>
       </el-form-item>
       <el-form-item label="介绍：" prop="description">
-        <ckeditor :editor="editor" v-model="model.description" :config="editorConfig"></ckeditor>
+        <ckeditor v-model="model.description" :editor="editor" :config="editorConfig" />
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -63,7 +63,7 @@ export default {
       },
       editor: ClassicEditor,
       editorConfig: {
-        height: '400px',
+        height: '400px'
       }
     }
   },
