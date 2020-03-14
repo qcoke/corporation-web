@@ -1,6 +1,6 @@
 <template>
   <div class="page-view">
-    <input type="hidden" v-model="id">
+    <input v-model="id" type="hidden">
     <ckeditor v-model="html" :editor="editor" :config="editorConfig" />
     <p>
       <el-button type="primary" size="small" @click="submit">保 存</el-button>
@@ -18,7 +18,7 @@ export default {
     return {
       editor: ClassicEditor,
       editorConfig: {
-        height: '400px'
+        ckfinder: { uploadUrl: 'http://localhost:3000/file/upload' }
       },
       id: '',
       html: ''
