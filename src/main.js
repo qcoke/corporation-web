@@ -16,8 +16,7 @@ import '@/icons' // icon
 import '@/permission' // permission control
 
 import GlobleFilter from './utils/globle_filter'
-
-import CKEditor from '@ckeditor/ckeditor5-vue';
+import CKEditor from '@ckeditor/ckeditor5-vue'
 
 /**
  * If you don't want to use mock-server
@@ -28,8 +27,8 @@ import CKEditor from '@ckeditor/ckeditor5-vue';
  * please remove it before going online ! ! !
  */
 if (process.env.NODE_ENV === 'production') {
-  const { mockXHR } = require('../mock')
-  mockXHR()
+  /* const { mockXHR } = require('../mock')
+  mockXHR() */
 }
 
 // set ElementUI lang to EN

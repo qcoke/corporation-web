@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    width="60%"
+    width="1000px"
     :title="title"
     :visible.sync="isShow"
     :append-to-body="true"
@@ -9,13 +9,38 @@
     :before-close="closeIt"
   >
     <el-form ref="submitForm" label-width="100px" :model="model" :rules="rules">
-      <el-form-item label="姓名：" prop="name">
-        <input v-model="model._id" type="hidden">
-        <el-input v-model="model.name" type="text" placeholder="请输入姓名" />
-      </el-form-item>
-      <el-form-item label="英文名：" prop="englist_name">
-        <el-input v-model="model.englist_name" type="text" placeholder="请输入英文名" />
-      </el-form-item>
+      <table border="0" width="100%">
+        <tr>
+          <td width="80%">
+            <el-form-item label="姓名：" prop="name">
+              <input v-model="model._id" type="hidden">
+              <el-input v-model="model.name" type="text" placeholder="请输入姓名" />
+            </el-form-item>
+          </td>
+          <td width="20%" rowspan="2" class="img-container">
+            <el-upload
+              class="avatar-uploader"
+              action="/file/upload"
+              :with-credentials="true"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="beforeAvatarUpload"
+            >
+              <img v-if="imageUrl" :src="imageUrl" class="avatar">
+              <i v-else class="el-icon-plus avatar-uploader-icon" />
+            </el-upload>
+            <br>
+            照片(200x240)
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <el-form-item label="英文名：" prop="englist_name">
+              <el-input v-model="model.englist_name" type="text" placeholder="请输入英文名" />
+            </el-form-item>
+          </td>
+        </tr>
+      </table>
       <el-form-item label="出生日期：" prop="birthday">
         <el-date-picker v-model="model.birthday" type="date" placeholder="请选择出生日期" style="width: 100%;" />
       </el-form-item>
@@ -29,8 +54,50 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="介绍：" prop="description">
-        <ckeditor v-model="model.description" :editor="editor" :config="editorConfig" />
+      <el-form-item label="资质：" prop="qualifications">
+        <el-input
+          v-model="model.qualifications"
+          resize="none"
+          type="textarea"
+          placeholder="请输入获奖"
+          :autosize="true"
+        />
+      </el-form-item>
+      <el-form-item label="教育背景：" prop="education_background">
+        <el-input
+          v-model="model.education_background"
+          resize="none"
+          type="textarea"
+          placeholder="请输入获奖"
+          :autosize="true"
+        />
+      </el-form-item>
+      <el-form-item label="工作经验：" prop="work_experiences">
+        <el-input
+          v-model="model.work_experiences"
+          resize="none"
+          type="textarea"
+          placeholder="请输入获奖"
+          :autosize="true"
+        />
+      </el-form-item>
+      <el-form-item label="学术研究：" prop="academic_researches">
+        <el-input
+          v-model="model.academic_researches"
+          resize="none"
+          type="textarea"
+          placeholder="请输入获奖"
+          :autosize="true"
+        />
+      </el-form-item>
+      <el-form-item label="获奖：" prop="awards">
+        <el-input
+          v-model="model.awards"
+          resize="none"
+          type="textarea"
+          placeholder="请输入获奖"
+          :autosize="true"
+        />
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -49,6 +116,7 @@ export default {
   name: 'AddOrUpdateEmployeeDialog',
   data() {
     return {
+      imageUrl: '//iph.href.lu/200x240',
       title: '新增',
       loading: false,
       isShow: false,
@@ -63,6 +131,7 @@ export default {
       },
       editor: ClassicEditor,
       editorConfig: {
+        width: '860px',
         height: '400px'
       }
     }
@@ -117,8 +186,44 @@ export default {
       orgsList().then(res => {
         _this.orgDic = res.data
       })
+    },
+    // 设置用户的照片头像
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw) || '//iph.href.lu/200x240'
+    },
+    beforeAvatarUpload(file) {
+      const isJPG = file.type === 'image/jpeg'
+      const isLt2M = file.size / 1024 / 1024 < 2
+
+      if (!isJPG) {
+        this.$message.error('上传头像图片只能是 JPG 格式!')
+      }
+      if (!isLt2M) {
+        this.$message.error('上传头像图片大小不能超过 2MB!')
+      }
+      return isJPG && isLt2M
     }
   }
 }
 </script>
-
+<style scoped>
+.img-container {
+  text-align: center;
+  vertical-align: top;
+}
+.avatar-uploader {
+  position: relative;
+  margin: 0 auto;
+  width: 100px;
+  height: 120px;
+  line-height: 120px;
+  border: 1px solid #eee;
+  padding: 2px;
+  font-size: 40px;
+  background-color: #fff;
+}
+.avatar-uploader img{
+  width: 100%;
+  height: 100%;
+}
+</style>

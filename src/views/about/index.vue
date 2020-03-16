@@ -17,11 +17,14 @@ export default {
   data() {
     return {
       editor: ClassicEditor,
-      editorConfig: {
-        ckfinder: { uploadUrl: 'http://localhost:3000/file/upload' }
-      },
       id: '',
-      html: ''
+      html: '',
+      editorConfig: {
+        width: '1150px',
+        ckfinder: {
+          uploadUrl: 'http://localhost:3000/file/upload'
+        }
+      }
     }
   },
   mounted() {
@@ -57,8 +60,11 @@ export default {
 </script>
 <style scoped>
 .page-view {
-  width: 800px;
+  width: 1140px;
   margin: 20px;
   min-height: 400px;
+  font-size: 15px;
+  line-height: 28px;
+  font-family: 'Open Sans', sans-serif;
 }
 </style>
