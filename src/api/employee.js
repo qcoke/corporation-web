@@ -9,6 +9,7 @@ export function staffesList() {
 }
 
 export function staffeAddOrUpdate(data) {
+  console.log('传输给服务器的数据:', data)
   if (data._id === undefined) {
     // 新增
     return request({

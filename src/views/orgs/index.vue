@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-row>
       <el-col :span="24">
-        <el-button type="primary" size="small" @click="showAddOrUpdate"><i class="el-icon-plus" /> 新 增</el-button>
+        <el-button type="primary" size="small" @click="showAddOrUpdate()"><i class="el-icon-plus" /> 新 增</el-button>
       </el-col>
     </el-row>
     <br>

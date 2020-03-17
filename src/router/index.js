@@ -46,13 +46,13 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
-    children: [{
+    redirect: '/company'
+    /* children: [{
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
       meta: { title: '系统概览', icon: 'dashboard' }
-    }]
+    }] */
   },
 
   {
@@ -60,13 +60,13 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/company/employee',
     name: 'company',
-    meta: { title: '组织/人员', icon: 'example' },
+    meta: { title: '部门/人员', icon: 'example' },
     children: [
       {
         path: 'orgs',
         name: 'Org',
         component: () => import('@/views/orgs/index'),
-        meta: { title: '组织管理', icon: 'table' }
+        meta: { title: '部门管理', icon: 'table' }
       },
       {
         path: 'employee',

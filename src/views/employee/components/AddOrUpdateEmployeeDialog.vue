@@ -26,7 +26,7 @@
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload"
             >
-              <img v-if="imageUrl" :src="imageUrl" class="avatar">
+              <img v-if="model.imageUrl" :src="model.imageUrl" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon" />
             </el-upload>
             <br>
@@ -41,9 +41,9 @@
           </td>
         </tr>
       </table>
-      <el-form-item label="出生日期：" prop="birthday">
+      <!-- <el-form-item label="出生日期：" prop="birthday">
         <el-date-picker v-model="model.birthday" type="date" placeholder="请选择出生日期" style="width: 100%;" />
-      </el-form-item>
+      </el-form-item> -->
       <el-form-item label="部门：" prop="org_id">
         <el-select v-model="model.org_id" placeholder="请选择" style="width: 100%;">
           <el-option
@@ -116,7 +116,6 @@ export default {
   name: 'AddOrUpdateEmployeeDialog',
   data() {
     return {
-      imageUrl: '//iph.href.lu/200x240',
       title: '新增',
       loading: false,
       isShow: false,
@@ -145,6 +144,7 @@ export default {
       this.$refs['submitForm'].validate(valid => {
         if (valid === true) {
           // 判断是更新还是删除
+          console.dir(_this.model)
           staffeAddOrUpdate(_this.model).then(response => {
             _this.$message({
               message: '操作成功',
@@ -190,6 +190,8 @@ export default {
     // 设置用户的照片头像
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw) || '//iph.href.lu/200x240'
+      // this.model.imageUrl = res.url
+      this.$set(this.model, 'imageUrl', res.url)
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg'
@@ -222,8 +224,8 @@ export default {
   font-size: 40px;
   background-color: #fff;
 }
-.avatar-uploader img{
-  width: 100%;
-  height: 100%;
+.avatar-uploader .el-upload,.avatar-uploader .el-upload img{
+  width: 100px;
+  height: 120px;
 }
 </style>
