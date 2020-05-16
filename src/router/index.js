@@ -94,7 +94,7 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'https://www.baidu.com/',
+        path: 'http://422830.ichengyun.net',
         meta: { title: '网站首页', icon: 'link' }
       }
     ]

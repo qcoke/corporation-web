@@ -1,36 +1,49 @@
 <template>
   <div class="app-container">
-    <el-row>
-      <el-col :span="24">
-        <el-button type="primary" size="small" @click="showAddOrUpdate()"><i class="el-icon-plus" /> 新 增</el-button>
-      </el-col>
-    </el-row>
-    <br>
-    <el-table
-      v-loading="listLoading"
-      :data="list"
-      element-loading-text="Loading"
-      border
-      fit
-      highlight-current-row
-    >
-      <el-table-column label="姓名" prop="name" width="120" />
-      <el-table-column label="英文名" prop="englist_name" width="200" />
-      <el-table-column label="部门" prop="org_id" :formatter="changeForText" />
-      <el-table-column align="center" prop="createdAt" label="创建时间" width="240">
-        <template slot-scope="scope">
-          <span>{{ scope.row.createdAt|dateformat }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" label="操作" width="240">
-        <template slot-scope="scope">
-          <el-button type="primary" plain size="mini" @click="showAddOrUpdate(scope.row._id)"><i class="el-icon-edit-outline" /> 编 辑
-          </el-button>
-          <el-button type="danger" plain size="mini" @click="deleteData(scope.row._id)"><i class="el-icon-close" /> 删 除
-          </el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    <div class="curd-table">
+      <div class="curd-main">
+        <el-row>
+          <el-col :span="24">
+            <el-button type="primary" size="small" @click="showAddOrUpdate()"><i class="el-icon-plus" /> 新 增</el-button>
+          </el-col>
+        </el-row>
+        <br>
+        <el-table
+          v-loading="listLoading"
+          element-loading-text="Loading"
+          stripe
+          fit
+          highlight-current-row
+          :data="list"
+        >
+          <el-table-column label="姓名" prop="name" width="120" />
+          <el-table-column label="英文名" prop="englist_name" width="200" />
+          <el-table-column label="部门" prop="org_id" :formatter="changeForText" />
+          <el-table-column align="center" prop="createdAt" label="创建时间" width="240">
+            <template slot-scope="scope">
+              <span>{{ scope.row.createdAt|dateformat }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column align="center" label="操作" width="240">
+            <template slot-scope="scope">
+              <el-button type="primary" plain size="mini" @click="showAddOrUpdate(scope.row._id)"><i class="el-icon-edit-outline" /> 编 辑
+              </el-button>
+              <el-button type="danger" plain size="mini" @click="deleteData(scope.row._id)"><i class="el-icon-close" /> 删 除
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="curd-page">
+        <el-pagination
+          class="txt-right"
+          background
+          layout="prev, pager, next"
+          :total="total"
+          @current-change="changePage"
+        />
+      </div>
+    </div>
     <AddOrUpdateEmployeeDialog ref="AddOrUpdateEmployeeDialog" @reload="load" />
   </div>
 </template>
@@ -49,7 +62,7 @@ export default {
     return {
       orgDic: [],
       list: null,
-      page: 0,
+      page: 1,
       total: 0,
       listLoading: true
     }
@@ -65,8 +78,11 @@ export default {
   },
   methods: {
     load() {
+      const params = {
+        page: this.page
+      }
       this.listLoading = true
-      staffesList().then(response => {
+      staffesList(params).then(response => {
         this.listLoading = false
         this.list = response.data
         this.page = response.page
@@ -100,6 +116,11 @@ export default {
         }
       }
       return result
+    },
+    // 翻页
+    changePage(val) {
+      this.page = val
+      this.load()
     }
   }
 }

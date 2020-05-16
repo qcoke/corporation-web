@@ -1,9 +1,10 @@
 import request from '@/utils/request'
 
 // 获取列表
-export function staffesList() {
+export function staffesList(params) {
+  const url = encodeURI(`/staffes?query=${JSON.stringify(params)}`)
   return request({
-    url: '/staffes/',
+    url: url,
     method: 'get'
   })
 }

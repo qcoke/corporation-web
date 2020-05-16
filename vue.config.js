@@ -35,9 +35,10 @@ module.exports = {
     proxy: {
       '/dev-api': {
         target: 'http://localhost:3000/',
+        // target: 'http://422830.ichengyun.net/api/',
         changeOrigin: true,
         pathRewrite: {
-          '^/dev-api': ''
+          '^/dev-api': '/'
         }
       }
     }
