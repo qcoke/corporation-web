@@ -1,7 +1,7 @@
 <template>
   <div class="page-view">
     <input v-model="id" type="hidden">
-    <ckeditor v-model="html" :editor="editor" :config="editorConfig" />
+    <ckeditor ref="ckeditor" v-model="html" :editor="editor" :config="editorConfig" @ready="onEditorReady" />
     <p>
       <el-button type="primary" size="small" @click="submit">保 存</el-button>
     </p>
@@ -10,6 +10,7 @@
 
 <script>
 import { savePage, getAboutPage } from '../../../src/api/page'
+import { getToken } from '@/utils/auth'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
 export default {
@@ -54,6 +55,12 @@ export default {
           type: 'success'
         })
       })
+    },
+    // CKEditor 准备完毕
+    onEditorReady(editor) {
+      this.editor = editor
+      getToken()
+      console.info(this.editor)
     }
   }
 }

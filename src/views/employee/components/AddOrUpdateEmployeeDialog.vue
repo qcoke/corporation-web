@@ -21,6 +21,7 @@
             <el-upload
               class="avatar-uploader"
               action="/file/upload"
+              :headers="{'X-Token': xToken, 'Authorization': Authorization}"
               :with-credentials="true"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
@@ -111,11 +112,14 @@
 import { orgsList } from '../../../api/orgs'
 import { staffeAddOrUpdate, staffeFind } from '../../../api/employee'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import { getToken } from '@/utils/auth'
 
 export default {
   name: 'AddOrUpdateEmployeeDialog',
   data() {
     return {
+      xToken: getToken(),
+      Authorization: `Bearer ` + getToken(),
       title: '新增',
       loading: false,
       isShow: false,

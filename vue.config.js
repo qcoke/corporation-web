@@ -34,7 +34,7 @@ module.exports = {
     open: true,
     proxy: {
       '/dev-api': {
-        target: 'http://localhost:3000/',
+        target: 'https://en.zonekey.com/api/',
         // target: 'http://422830.ichengyun.net/api/',
         changeOrigin: true,
         pathRewrite: {
